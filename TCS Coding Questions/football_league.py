@@ -1,6 +1,6 @@
 points = {}
 gd = {}
-
+matches = {}
 for match in matches:
     team1, team2 = match[0], match[1]
     goals1, goals2 = map(int, match[2].split("-"))
