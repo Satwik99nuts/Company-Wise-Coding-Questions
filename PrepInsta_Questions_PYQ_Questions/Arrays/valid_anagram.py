@@ -8,4 +8,4 @@ def valid_anagram(char1,char2)->bool:
 
 char1 = input("Write the first character: ")
 char2 = input("Write the second character: ")
-print(valid_anagram)
+print(valid_anagram(char1,char2))
