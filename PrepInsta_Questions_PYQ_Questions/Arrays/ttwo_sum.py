@@ -1,4 +1,4 @@
-def two_sum(nums:list[int],target:int)->list[int]:
+def two_sum(nums:list[int],target:int):
     # brute force
     # n = len(nums)
     # for i in range(n+1):
