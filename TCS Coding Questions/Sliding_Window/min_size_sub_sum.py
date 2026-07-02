@@ -12,6 +12,6 @@ def min_size_sub_arr_sum(nums,target):
             window_sum -= nums[low]
             low+=1
     return 0 if min_len == float("inf") else min_len
-nums = [1,2,3,4,5]        
-target = 6
-print(min_size_sub_arr_sum(nums,target))
+nums = list(map(int,input().split()))
+target = int(input())
+print(min_size_sub_arr_sum(nums,target)) 
