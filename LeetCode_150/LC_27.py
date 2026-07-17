@@ -14,7 +14,7 @@ def rem_dup(nums,val):
     count = 0
     for i in range(len(nums)):
         if nums[i]!=val:
-            nums[count] = nums[i]
+            nums[count] = nums[i] #kyuki inplace karna tha
             count+=1
     return count
 
