@@ -7,5 +7,5 @@ def dist(nums):
             seen.append(num)
             count+=1
     return count
-nums = [1,2,34,2,3]
+nums = [1,2,34,7,3]
 print(dist(nums))
