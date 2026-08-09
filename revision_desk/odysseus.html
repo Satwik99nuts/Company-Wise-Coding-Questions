@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey — Cinematic Experience</title>
+
+    <!-- FONTS -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "EB Garamond";
+            background: #0d0a07;
+            color: #f3e7c8;
+            overflow-x: hidden;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 40px;
+        }
+
+        h1,
+        h2 {
+            font-family: "Cinzel Decorative";
+            letter-spacing: 3px;
+        }
+
+        .layer {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            pointer-events: none;
+        }
+
+        /* HERO */
+        .hero {
+            background: radial-gradient(circle, #2a1a12, #0d0a07);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            opacity: 0;
+        }
+
+        /* PARALLAX WAVES */
+        .wave {
+            background: linear-gradient(90deg, #123, #345, #123);
+            opacity: 0.4;
+        }
+
+        /* CARD */
+        .card {
+            max-width: 600px;
+            border: 1px solid #c9a961;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
+        /* BUTTON */
+        button {
+            padding: 10px 16px;
+            border: 1px solid gold;
+            background: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* BOW */
+        svg {
+            width: 250px;
+        }
+
+        .string {
+            stroke: gold;
+            stroke-width: 3;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <h1 id="title">ΟΔΥΣΣΕΙΑ</h1>
+        <p id="subtitle">A cinematic journey home</p>
+    </section>
+
+    <!-- CYCLOPS -->
+
+    <section>
+        <div class="card">
+            <h2>Cyclops</h2>
+            <p id="cyclopsText">A trick of identity defeats brute force.</p>
+            <button id="cyclopsBtn">Reveal</button>
+        </div>
+    </section>
+
+    <!-- SIRENS -->
+
+    <section>
+        <div class="layer wave" id="wave1"></div>
+        <div class="card">
+            <h2>Sirens</h2>
+            <p id="sirensText">Their song bends the will of men.</p>
+            <button id="sirensBtn">Listen</button>
+        </div>
+    </section>
+
+    <!-- CHOICE -->
+
+    <section>
+        <div class="card">
+            <h2>Scylla vs Charybdis</h2>
+            <button id="scylla">Scylla</button>
+            <button id="chary">Charybdis</button>
+            <p id="choiceText"></p>
+        </div>
+    </section>
+
+    <!-- BOW -->
+
+    <section>
+        <div class="card">
+            <h2>The Bow</h2>
+            <button id="bowBtn">Draw</button>
+
+            <svg viewBox="0 0 200 100">
+                <path d="M20,80 Q100,0 180,80" stroke="#aaa" fill="none" stroke-width="3" />
+                <line x1="20" y1="80" x2="180" y2="80" class="string" />
+            </svg>
+
+            <p id="bowText"></p>
+        </div>
+    </section>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* HERO CINEMATIC INTRO */
+        gsap.to("#title", {
+            opacity: 1,
+            y: -20,
+            duration: 2,
+            ease: "power3.out"
+        });
+
+        gsap.from("#subtitle", {
+            opacity: 0,
+            y: 30,
+            duration: 2,
+            delay: 0.5
+        });
+
+        /* SECTION REVEALS */
+        gsap.utils.toArray("section").forEach(sec => {
+            gsap.from(sec.querySelector(".card"), {
+                scrollTrigger: {
+                    trigger: sec,
+                    start: "top 70%"
+                },
+                opacity: 0,
+                y: 80,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        /* PARALLAX */
+        gsap.to("#wave1", {
+            scrollTrigger: {
+                trigger: "#wave1",
+                scrub: true
+            },
+            x: 300
+        });
+
+        /* BUTTON ANIMATIONS */
+        document.getElementById("cyclopsBtn").onclick = () => {
+            gsap.to("#cyclopsText", {
+                duration: 1,
+                text: "“Nobody is hurting me!” — so no one comes.",
+                ease: "power2.out"
+            });
+        };
+
+        document.getElementById("sirensBtn").onclick = () => {
+            gsap.fromTo("#sirensText",
+                { opacity: 0 },
+                { opacity: 1, duration: 1, text: "Bound to the mast, he survives the song." }
+            );
+        };
+
+        /* CHOICE */
+        document.getElementById("scylla").onclick = () => {
+            gsap.to("#choiceText", { text: "You lose men—but live.", duration: 1 });
+        };
+        document.getElementById("chary").onclick = () => {
+            gsap.to("#choiceText", { text: "Total destruction risks all.", duration: 1 });
+        };
+
+        /* BOW ANIMATION */
+        document.getElementById("bowBtn").onclick = () => {
+            gsap.to(".string", {
+                strokeDashoffset: 0,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+            gsap.to("#bowText", {
+                text: "The king returns.",
+                duration: 1,
+                delay: 0.5
+            });
+        };
+    </script>
+
+</body>
+
+</html>
