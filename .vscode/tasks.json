@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: build active file",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "if ('${fileExtname}' -ieq '.c') { & 'C:/msys64/msys64-2026/ucrt64/bin/gcc.exe' -fdiagnostics-color=always -g '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe' } elseif ('${fileExtname}' -ieq '.cpp') { & 'C:/msys64/msys64-2026/ucrt64/bin/g++.exe' -fdiagnostics-color=always -g '${file}' -o '${fileDirname}\\${fileBasenameNoExtension}.exe' } else { Write-Error 'Open a .c or .cpp file before running this task.'; exit 1 }"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Builds the active .c file with gcc and the active .cpp file with g++."
+        }
+    ]
+}

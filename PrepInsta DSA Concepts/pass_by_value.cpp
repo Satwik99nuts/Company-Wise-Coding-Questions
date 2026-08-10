@@ -19,7 +19,7 @@ int main()
     printf("Before swap, value of b : %d\n", b);
 
     /* calling a function to swap the values */
-    swap(a, b);
+    swap(a, b); // this is basically pass by value as we are calling a function 
 
     printf("After swap, value of a : %d\n", a);
     printf("After swap, value of b : %d\n", b);

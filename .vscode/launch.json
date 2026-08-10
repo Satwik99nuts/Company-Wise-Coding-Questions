@@ -2,16 +2,36 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "C/C++: debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "${fileDirname}",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "preLaunchTask": "C/C++: build active file",
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/msys64/msys64-2026/ucrt64/bin/gdb.exe",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/COMPANY WISE PREP AND CODING QUESTIONS/TCS Coding Questions",
-      "program": "d:/COMPANY WISE PREP AND CODING QUESTIONS/TCS Coding Questions/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "C:/msys64/msys64-2026/ucrt64/bin/gdb.exe",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
