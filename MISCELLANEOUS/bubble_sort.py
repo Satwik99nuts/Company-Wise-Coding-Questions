@@ -1,7 +1,7 @@
 def bubble_sort(arr):
-    a = list(map(int,input().split()))
-    n = int(input())
-    
+    # a = list(map(int,input().split()))
+    # n = int(input())
+    n = len(arr)
     for i in range(n-1):
         swapped = False
         for j in range(n-i-1):
@@ -10,5 +10,6 @@ def bubble_sort(arr):
                 swapped = True
         if not swapped:
             break
+    return arr
 arr = [1,2,34,21,344]
 print(bubble_sort(arr))

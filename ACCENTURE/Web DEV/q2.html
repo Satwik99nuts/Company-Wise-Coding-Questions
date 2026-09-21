@@ -1,0 +1,20 @@
+<!-- There is an input box and an Add button. When the user enters a name and clicks Add, a new item containing that name should appear in a list without reloading the page. -->
+
+<input id="nameInput" type="text" placeholder="Enter Your Name">
+
+<button id="addbtn">Add</button>
+
+<ul id="namelist"></ul>
+
+<script>
+    const input = document.getElementByid("nameInput");
+    const addbtn = document.getElementById("addbtn");
+
+    addbtn.addEventListener("click",function(){
+        const name = input.value;
+        const li = document.createElement("li");
+        li.textContent = name;
+        list.appendchild(li);
+    })
+    
+</script>

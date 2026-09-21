@@ -1,0 +1,22 @@
+<!-- Given a message box and buttons, add/use buttons so that when a button is clicked, its text appears in the message box. -->
+
+<div id="messageBox">Click a button</div>
+
+<div id="Button">
+  <button class="option">HTML</button>
+  <button class="option">CSS</button>
+  <button class="option">JS</button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll(".option");
+  const messagebox = document.getElementById("messageBox");
+
+  buttons.forEach(function (button)
+  {
+    button.addEventListener("click", function (event)
+    {
+      messagebox.textContent = event.target.textContent;
+    });
+  });
+</script>
