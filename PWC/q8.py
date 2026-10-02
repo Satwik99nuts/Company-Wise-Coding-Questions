@@ -1,0 +1,3 @@
+# How can you find, within a given array of non-negative integers, a subarray that sums up to a specified sum? Additionally, if there are multiple subarrays with the same sum, how do you identify and print the first such subarray? Example: Input: arr[] = {1, 4, 20, 3, 10, 5}, sum = 33 Output: Sum found between indexes 2 and 4 Explanation: Sum of elements between indices 2 and 4 is 20 + 3 + 10 = 33 Input: arr[] = {1, 4, 0, 0, 3, 10, 5}, sum = 7 Output: Sum found between indexes 1 and 4 Explanation: Sum of elements between indices 1 and 4 is 4 + 0 + 0 + 3 = 7 Input: arr[] = {1, 4}, sum = 0 Output: No subarray found Explanation: There is no subarray with 0 sum
+
+
