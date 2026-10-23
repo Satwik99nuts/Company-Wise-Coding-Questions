@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produce Search</title>
+
+    <!-- CSS: webpage ka design aur styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f3f5;
+        }
+
+        .container {
+            width: 320px;
+            margin: 20px auto;
+            padding: 24px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .product {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Produce Search</h2>
+
+        <input type="text" id="search-input"
+               class="search-box"
+               placeholder="Type to search products...">
+
+        <ul>
+            <li class="product" data-name="banana">Banana</li>
+            <li class="product" data-name="orange">Orange</li>
+            <li class="product" data-name="pineapple">Pineapple</li>
+            <li class="product" data-name="pomegranate">Pomegranate</li>
+            <li class="product" data-name="mango">Mango</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Input element ko select kiya jisme user search karega
+        const searchInput = document.getElementById('search-input');
+
+        // Product class wale saare list items select kiye
+        const productList = document.querySelectorAll('.product');
+
+        // Objective: initial search value ko "nana" set karna
+        searchInput.value = "nana";
+
+        function filterProducts() {
+
+            // Input element se actual text nikala,
+            // phir lowercase aur extra spaces remove kiye
+            const filterValue = searchInput.value.toLowerCase().trim();
+
+            // Har product ko ek-ek karke check karenge
+            productList.forEach(item => {
+
+                // data-name attribute ki value nikali
+                // toLowerCase() ek method hai, isliye () lagana zaroori hai
+                const dataName = item.getAttribute('data-name').toLowerCase();
+
+                // Check karenge ki product name mein search text hai ya nahi
+                if (dataName.includes(filterValue)) {
+
+                    item.style.display = ""; // Matching item ko show karo
+
+                } else {
+
+                    item.style.display = "none"; // Non-matching item ko hide karo
+                }
+            });
+        }
+
+        // User jab bhi input change karega, filter dobara chalega
+        searchInput.addEventListener('input', filterProducts);
+
+        // Page load hone par initial search bhi apply karna zaroori hai
+        filterProducts();
+
+    </script>
+
+</body>
+</html>

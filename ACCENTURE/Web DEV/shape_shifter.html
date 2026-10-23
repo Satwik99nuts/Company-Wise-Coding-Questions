@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Switcher</title>
+
+    <style>
+        .canvas {
+            height: 220px;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .shape {
+            width: 100px;
+            height: 100px;
+            background: #a000ff;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            background: transparent;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 90px solid #a000ff;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .square {
+            border-radius: 0;
+        }
+
+        button {
+            margin-right: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="canvas">
+        <div id="shape" class="triangle"></div>
+    </div>
+
+    <button onclick="showShape('triangle')">Triangle</button>
+    <button onclick="showShape('circle')">Circle</button>
+    <button onclick="showShape('square')">Square</button>
+
+    <script>
+        function showShape(type) {
+            const shape = document.getElementById("shape");
+
+            shape.className = type;
+            if (type !== "triangle") {
+                shape.classList.add("shape");
+            }
+        }
+    </script>
+
+</body>
+</html>

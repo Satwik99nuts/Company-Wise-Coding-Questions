@@ -19,3 +19,5 @@ def autobiographical(n):
         if count[i] != int(n[i]):
             return 0
     return len(set(n))  # Return the count of distinct digits used in N
+
+print(autobiographical("1210"))

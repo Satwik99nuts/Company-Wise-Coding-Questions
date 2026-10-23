@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Task Management System</title>
+
+    <!-- CSS: webpage ka layout aur design -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 3px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .completed {
+            color: green;
+            text-decoration: line-through;
+        }
+
+        #Error {
+            color: red;
+        }
+
+        #count {
+            font-weight: bold;
+        }
+
+        /* Small screens par table ko fit rakhne ke liye */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Employee Task Manager</h2>
+
+        <!-- Employee ka naam enter karne ke liye -->
+        <input
+            type="text"
+            id="emp_name"
+            placeholder="Write the Employee Name..."
+        >
+
+        <!-- Task enter karne ke liye -->
+        <input
+            type="text"
+            id="task_name"
+            placeholder="Write the Task Name..."
+        >
+
+        <!-- Button click karne par addTask() chalega -->
+        <button onclick="addTask()">Add Task</button>
+
+        <!-- Error message yahan display hoga -->
+        <p id="Error"></p>
+
+        <div class="table-wrapper">
+            <table>
+                <!-- Table headings -->
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <!-- JavaScript ke naye rows yahan add honge -->
+                <tbody id="TaskTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total tasks ka count -->
+        <p>Total Tasks = <span id="count">0</span></p>
+
+    </div>
+
+    <script>
+        // Total tasks ko track karne ke liye
+        let taskcount = 0;
+
+        function addTask() {
+
+            // Input boxes se values read kar rahe hain
+            let Employee = document.getElementById("emp_name").value.trim();
+            let Task = document.getElementById("task_name").value.trim();
+
+            // Error message wale element ko select kiya
+            let Error = document.getElementById("Error");
+
+            // TODO 1: Validate employee and task
+            // Agar dono mein se koi bhi empty hai toh error show karo
+            if (Employee === "" || Task === "") {
+                Error.textContent = "Employee and Task can't be empty";
+                return; // Function ko yahin stop kar do
+            }
+
+            // Valid input aane par purana error clear karo
+            Error.textContent = "";
+
+            // TODO 2: Create a new table row
+            let table = document.getElementById("TaskTable");
+            let row = document.createElement("tr");
+
+            // TODO 3: Add employee, task, status and buttons
+
+            // Employee name ke liye first cell
+            let employeeCell = row.insertCell(0);
+            employeeCell.textContent = Employee;
+
+            // Task description ke liye second cell
+            let taskCell = row.insertCell(1);
+            taskCell.textContent = Task;
+
+            // Status ke liye third cell
+            let statusCell = row.insertCell(2);
+            statusCell.textContent = "Pending";
+            statusCell.classList.add("status");
+
+            // Complete aur Delete buttons ke liye fourth cell
+            let actionCell = row.insertCell(3);
+
+            // Complete button create kiya
+            let completeButton = document.createElement("button");
+            completeButton.textContent = "Complete";
+
+            // Click hone par isi task ko complete karega
+            completeButton.onclick = function () {
+                completeTask(this);
+            };
+
+            // Complete button ko action cell mein add kiya
+            actionCell.appendChild(completeButton);
+
+            // Delete button create kiya
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+
+            // Click hone par isi task ko delete karega
+            deleteButton.onclick = function () {
+                deleteTask(this);
+            };
+
+            // Delete button ko action cell mein add kiya
+            actionCell.appendChild(deleteButton);
+
+            // Nayi row ko table mein insert kiya
+            table.appendChild(row);
+
+            // TODO 4: Update task count
+            taskcount++;
+            document.getElementById("count").textContent = taskcount;
+
+            // TODO 5: Clear input fields
+            document.getElementById("emp_name").value = "";
+            document.getElementById("task_name").value = "";
+        }
+
+        // Complete button click hone par ye function chalega
+        function completeTask(button) {
+
+            // Clicked button ki parent table row find karo
+            let row = button.closest("tr");
+
+            // Us row ke status cell ko select karo
+            let status = row.querySelector(".status");
+
+            // Status Pending se Completed kar do
+            status.textContent = "Completed";
+
+            // Completed task par CSS styling apply karo
+            status.classList.add("completed");
+
+            // Complete button ko dobara click hone se roko
+            button.disabled = true;
+        }
+
+        // Delete button click hone par ye function chalega
+        function deleteTask(button) {
+
+            // Delete button ki corresponding row find karo
+            let row = button.closest("tr");
+
+            // Selected task ki row remove kar do
+            row.remove();
+
+            // Total tasks ek se kam kar do
+            taskcount--;
+
+            // Updated count webpage par display karo
+            document.getElementById("count").textContent = taskcount;
+        }
+    </script>
+</body>
+</html>

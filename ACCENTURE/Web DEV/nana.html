@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accenture-Web based Question</title>
+    <style>
+      .product {
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Search Products by name</h2>
+
+    <input
+      type="text"
+      id="search_input"
+      class="si"
+      value="nana"
+      placeholder="Search products..."
+    />
+    <ul>
+      <li class="product">Banana</li>
+      <li class="product">Apple</li>
+      <li class="product">Strawberry</li>
+      <li class="product">Pineapple</li>
+      <li class="product">Litchi</li>
+    </ul>
+
+    <script>
+      const searchinput = document.getElementById("search_input");
+      const products = document.querySelectorAll(".product");
+
+      function filterproducts() 
+      {
+          const search_text = searchinput.value.toLowerCase().trim();
+
+          products.forEach(function(product) 
+          {
+              const productname = product.dataset.name.toLowerCase();
+
+              if (productname.includes(search_text)) {
+                  product.style.display = "list-item";
+              } else {
+                  product.style.display = "none";
+              }
+          });
+      }
+
+            searchinput.addEventListener("input", filterproducts);
+            filterproducts();
+                  });
+              }
+              searchinput.addEventListener("input",filterproducts);
+              filterproducts();
+    </script>
+  </body>
+</html>
