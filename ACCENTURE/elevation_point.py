@@ -31,10 +31,10 @@ print(elevation_point([5, 3]))  # 5
 # Simpler alternative: check each item one by one. It takes O(n) time,
 # while the binary-search solution above takes O(log n).
 #
-# def elevation_point_by_scanning(numbers):
-#     for index, value in enumerate(numbers):
-#         bigger_than_left = index == 0 or value > numbers[index - 1]
-#         bigger_than_right = index == len(numbers) - 1 or value > numbers[index + 1]
-#         if bigger_than_left and bigger_than_right:
-#             return value
-#     return None
+def elevation_point_by_scanning(numbers):
+    for index, value in enumerate(numbers):
+        bigger_than_left = index == 0 or value > numbers[index - 1]
+        bigger_than_right = index == len(numbers) - 1 or value > numbers[index + 1]
+        if bigger_than_left and bigger_than_right:
+            return value
+    return None

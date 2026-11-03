@@ -1,56 +1,31 @@
-# You are given an integer array A of length N, where each element is between 2 and 10 (inclusive).
+# Count consecutive blocks whose length equals their element value.
+# Example: [2, 2, 3, 3, 3, 4, 2, 2, 2] -> 2
 
-# A block is a consecutive group of identical elements.
+def count_valid_blocks(n, arr):
+    """Return the number of consecutive equal-value blocks with matching length."""
+    if n != len(arr):
+        raise ValueError("n must match the length of arr")
 
-# Count how many such blocks exist where:
+    valid_blocks = 0
+    i = 0
 
-# Length of the block = value of the element.
+    while i < n:
+        value = arr[i]
+        j = i
 
-# Return the count of such blocks.
+        # Move j to the first index after this consecutive block.
+        while j < n and arr[j] == value:
+            j += 1
 
-# Input
-# input1: An integer N, representing the size of the array.
-# input2: An integer array A.
-# Output
+        block_length = j - i
+        if block_length == value:
+            valid_blocks += 1
 
-# Return an integer representing the number of blocks whose length is equal to their element value.
+        # The next block starts where this one ends.
+        i = j
 
-# Example 1
-# input1 = 9
-# input2 = {2, 2, 3, 3, 3, 4, 2, 2, 2}
-
-# Consecutive blocks:
-
-# {2, 2}       → length = 2, value = 2  ✅
-# {3, 3, 3}    → length = 3, value = 3  ✅
-# {4}          → length = 1, value = 4  ❌
-# {2, 2, 2}    → length = 3, value = 2  ❌
-
-# Therefore:
-
-# Output = 2
-# Core concept
-
-# Array traversal + consecutive groups / run-length counting
+    return valid_blocks
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+arr = [2, 2, 3, 3, 3, 4, 2, 2, 2]
+print(count_valid_blocks(len(arr), arr))  # 2
